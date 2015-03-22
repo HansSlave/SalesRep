@@ -47,6 +47,7 @@ public class ResourceManager {
 	
 	//Office
 	public BitmapTextureAtlas officeTA;
+	public ITextureRegion greenButton;
 	public Font digitalFont;
 
 	//Race
@@ -109,7 +110,11 @@ public class ResourceManager {
 	//office
 	public synchronized void loadOfficeResources(Engine engine, Context context){
 		
-		//BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("fonts/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/Office/");
+		officeTA = new BitmapTextureAtlas(engine.getTextureManager(), 1024, 512);
+		greenButton = BitmapTextureAtlasTextureRegionFactory.createFromAsset(officeTA, context, "greenbutton.png", 10, 10);
+		officeTA.load();
+		
 		digitalFont = FontFactory.createFromAsset(engine.getFontManager(), engine.getTextureManager(), 256, 256, context.getAssets(), "fonts/digital.ttf", 48f, true, android.graphics.Color.BLACK);
 		digitalFont.load();
 		
@@ -117,6 +122,8 @@ public class ResourceManager {
 	}
 	
 	public synchronized void unloadOfficeResources(){
+		officeTA.unload();
+		greenButton = null;
 		digitalFont.unload();
 		isOfficeResourcesLoaded = false;
 	}

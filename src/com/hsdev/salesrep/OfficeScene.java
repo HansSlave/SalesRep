@@ -8,6 +8,7 @@ import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.adt.color.Color;
@@ -119,7 +120,9 @@ public class OfficeScene extends Scene{
 
 	public void showMiniGame(){
 
-		Rectangle phone = new Rectangle(400, 240, 400, 400, engine.getVertexBufferObjectManager()){
+		Rectangle phone = new Rectangle(400, 240, 400, 400, engine.getVertexBufferObjectManager());
+		
+		Sprite greenButton = new Sprite(300, 100, ResourceManager.getIstance().greenButton, engine.getVertexBufferObjectManager()){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY){
 				
@@ -140,16 +143,18 @@ public class OfficeScene extends Scene{
 				return true;				
 			}
 		};
-		this.registerTouchArea(phone);
+		
+		this.registerTouchArea(greenButton);
 		this.attachChild(phone);
+		phone.attachChild(greenButton);
 
-		difficultyText = new Text(100, 200, ResourceManager.getIstance().digitalFont, "0", 3, engine.getVertexBufferObjectManager());
+		difficultyText = new Text(100, 350, ResourceManager.getIstance().digitalFont, "0", 3, engine.getVertexBufferObjectManager());
 		phone.attachChild(difficultyText);
 
-		timeToClientText = new Text(200, 200, ResourceManager.getIstance().digitalFont, "0", 3, engine.getVertexBufferObjectManager());
+		timeToClientText = new Text(200, 350, ResourceManager.getIstance().digitalFont, "0", 3, engine.getVertexBufferObjectManager());
 		phone.attachChild(timeToClientText);
 
-		moneyToEarnText = new Text(300, 200, ResourceManager.getIstance().digitalFont, "0", 7, engine.getVertexBufferObjectManager());
+		moneyToEarnText = new Text(300, 350, ResourceManager.getIstance().digitalFont, "0", 7, engine.getVertexBufferObjectManager());
 		phone.attachChild(moneyToEarnText);
 
 
